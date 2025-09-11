@@ -1,0 +1,22 @@
+# PowerShell 7.5.2 (x64)
+
+**Product Code:** `{FEC29E44-BB89-4669-91C1-7E93C3EE177A}`  
+**Version:** 7.5.2.0  
+**Architecture:** 64-bit (x64)
+
+## Overview
+PowerShell 7.5.2 is a stable release of Microsoft’s cross-platform automation and configuration framework.  
+It is built on **.NET 8**, offering improved performance, compatibility, and modern features for administration, scripting, and DevOps workflows.
+
+## Key Features
+- Cross-platform support (Windows, Linux, macOS)  
+- Enhanced compatibility with existing Windows PowerShell modules  
+- Parallel execution with `ForEach-Object -Parallel`  
+- Predictive IntelliSense and improved error handling  
+- LTS alignment with the .NET release cycle  
+- Strong support for cloud and hybrid automation scenarios  
+
+## Resources
+- [PowerShell Documentation](https://learn.microsoft.com/powershell/)  
+- [Release Notes for v7.5.2](https://github.com/PowerShell/PowerShell/releases/tag/v7.5.2)  
+- [PowerShell GitHub Repository](https://github.com/PowerShell/PowerShell)  
