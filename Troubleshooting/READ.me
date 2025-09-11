@@ -1,1 +1,53 @@
 
+Current State: Personal Windows Device Enrollment is Blocked
+
+When personal Windows device enrollment is blocked in Intune, users cannot join or enroll personal devices into Microsoft Entra ID through self-service methods such as OOBE setup, Settings, Company Portal, or Microsoft 365 apps. Only IT-approved enrollment methods (Autopilot, GPO, ConfigMgr, PPKG, or Device Enrollment Manager) are allowed. This ensures that only corporate-owned and IT-managed devices can be enrolled into Intune, strengthening governance and device control.
+
+Current State: Block Intune Enrollment from Non-Trusted IP’s
+However, requiring enrollment from a known network location or corporate-controlled environment introduces additional limitations. Remote or hybrid users who are not on the corporate network cannot complete enrollment. This breaks down in practice, as it does not align with modern work scenarios where employees often set up devices from home or while traveling. As a result, enrollment policies that tie eligibility to network trust can create operational bottlenecks and poor user experiences.
+Enrollment Scenarios in Practice
+Blocked Scenarios (Personal Devices)
+These enrollment attempts are blocked to prevent unmanaged or personal devices from being added:
+1.	Personal laptop during OOBE (Out-of-Box Experience)
+o	User selects “Set up for work or school” during Windows setup.
+o	Device attempts Entra ID join with automatic MDM enrollment.
+o	Blocked unless registered with Autopilot.
+2.	Existing personal laptop (from Settings)
+o	User goes to Settings → Accounts → Access work or school → Connect → Entra ID join.
+o	Device attempts automatic MDM enrollment.
+o	Blocked because it is personal.
+3.	Add Work Account (without join)
+o	User adds a work account in Settings → Access work or school.
+o	Triggers automatic MDM enrollment.
+o	Blocked as personal.
+4.	MDM enrollment only from Settings
+o	User attempts manual MDM enrollment without Entra join.
+o	Blocked as personal.
+5.	Enrollment via Intune Company Portal app
+o	User installs and signs into Company Portal on a personal device.
+o	Enrollment attempts are blocked.
+6.	Enrollment via Microsoft 365 apps
+o	User signs into Teams, Outlook, or Office on a personal device.
+o	Selects “Allow my organization to manage this device.”
+o	Enrollment is blocked.
+Allowed Scenarios (Corporate Devices)
+Corporate-owned or IT-provisioned devices are recognized and allowed to enroll:
+1.	Autopilot-registered device
+o	Device recognized as corporate during OOBE through Autopilot registration.
+o	Enrollment is allowed.
+2.	Domain Join + Group Policy
+o	Enrollment initiated by IT configuration, using the device token.
+o	Allowed.
+3.	Bulk provisioning package (PPKG)
+o	Device provisioned using IT-provided PPKG.
+o	Allowed.
+4.	Device Enrollment Manager (DEM) account
+o	Enrollment performed using DEM account.
+o	Allowed.
+Summary of Proposed Approach
+We propose removing the known network location restriction for Intune device enrollment. While this restriction provides an additional safeguard, it prevents legitimate remote and hybrid users from enrolling devices outside of the corporate network, creating operational and user experience challenges.
+Instead, we will rely solely on the Intune personal device enrollment block configuration. This policy already ensures that only IT-approved enrollment scenarios are permitted, while preventing personal/self-service enrollment attempts. The result is a cleaner, more flexible model:
+•	Blocked: Personal/self-service enrollment methods (OOBE, Settings, Company Portal, Microsoft 365 apps).
+•	Allowed: IT-controlled enrollment methods (Autopilot, GPO, ConfigMgr, PPKG, Device Enrollment Manager).
+This approach maintains strong security and compliance by preventing personal device enrollment, while removing the unnecessary dependency on a corporate network location. It enables seamless enrollment for remote and hybrid users without weakening enforcement of corporate-only device management.
+
