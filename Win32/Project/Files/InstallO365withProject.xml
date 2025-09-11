@@ -1,5 +1,5 @@
 <Configuration ID="3c5aba9e-67dc-48d2-b1a2-c09cb4f05916">
-  <Add OfficeClientEdition="64" Channel="Current" ForceUpgrade="TRUE" MigrateArch="TRUE">
+  <Add OfficeClientEdition="64" Channel="MonthlyEnterprise" ForceUpgrade="TRUE" MigrateArch="TRUE">
     <Product ID="ProjectProRetail">
       <Language ID="MatchOS" />
     </Product>
