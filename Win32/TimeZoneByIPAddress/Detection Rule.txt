@@ -1,0 +1,7 @@
+Registry:
+
+HKEY_LOCAL_MACHINE\SOFTWARE\scloud\Set-TimeZoneByIPAddress
+
+Version
+
+Equals 1
