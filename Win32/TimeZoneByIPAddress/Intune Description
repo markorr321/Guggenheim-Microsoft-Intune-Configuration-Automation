@@ -1,0 +1,30 @@
+# Set Time Zone by IP Address
+
+This application automatically configures the **Windows time zone** based on the device’s **public IP address**.  
+It is designed for use with **Microsoft Intune and Autopilot**, ensuring devices always have the correct local time zone without manual intervention.
+
+## How It Works
+1. The script queries [ipinfo.io](http://ipinfo.io/json) to detect the device’s geographic **IANA time zone**.
+2. It maps the IANA zone to the correct **Windows time zone** using a custom XML mapping file.
+3. The system’s local time zone is updated with PowerShell’s `Set-TimeZone`.
+
+## Benefits
+- Ensures correct local time zone during **Autopilot provisioning**.
+- Eliminates manual user input for time zone settings.
+- Supports global deployments with multiple regions.
+- Can run silently in the background under **SYSTEM context**.
+
+## Requirements
+- Must be executed in a **64-bit context**.
+- Internet access to query `ipinfo.io` and download the XML mapping file.
+- Deployable via **Intune Management Extension**.
+
+## Logging
+Execution is logged to:
+C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\Set-TimeZoneByIPAddress-script.log
+
+---
+
+🔗 Learn more: [Automatically set the time zone in Intune Autopilot](https://scloud.work/automatically-set-the-time-zone-in-intune-autopilot/)
+
+
