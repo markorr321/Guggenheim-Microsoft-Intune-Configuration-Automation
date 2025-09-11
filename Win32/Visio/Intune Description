@@ -1,1 +1,28 @@
+# Microsoft Visio
+
+## Application Information
+- **Name:** Microsoft Visio
+- **Publisher:** Microsoft Corporation
+- **Category:** Productivity / Diagramming
+- **Version:** Latest (O365 / Standalone depending on license)
+
+## Description
+Microsoft Visio is a powerful diagramming and vector graphics application designed to help individuals and teams visualize, analyze, and communicate complex information. With a wide range of built-in templates, shapes, and stencils, Visio enables the creation of professional diagrams such as flowcharts, organizational charts, network diagrams, floor plans, process maps, and more. 
+
+Integrated with Microsoft 365, Visio allows seamless collaboration, real-time co-authoring, and secure cloud storage. It supports exporting and embedding diagrams into Microsoft Word, Excel, PowerPoint, and Teams, ensuring diagrams remain accessible across your workflows. 
+
+Visio empowers businesses to:
+- Streamline workflows with intelligent diagramming tools.
+- Improve communication by turning complex concepts into easy-to-understand visuals.
+- Enhance collaboration with cloud-based access and co-authoring.
+- Integrate seamlessly with Microsoft 365 applications and services.
+
+## Installation Notes
+- Requires an active Microsoft 365 subscription or a standalone Visio license.
+- Ensure that the appropriate edition (Visio Plan 1, Plan 2, or Visio Professional) matches user licensing.
+- Installation may require administrative permissions depending on your deployment model.
+
+## Support
+- **Vendor:** [Microsoft Support](https://support.microsoft.com)
+- **Documentation:** [Microsoft Visio Documentation](https://learn.microsoft.com/visio/)
 
