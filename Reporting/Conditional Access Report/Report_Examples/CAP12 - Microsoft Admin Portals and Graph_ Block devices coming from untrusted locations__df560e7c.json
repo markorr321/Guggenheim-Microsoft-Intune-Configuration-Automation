@@ -1,0 +1,140 @@
+{
+  "Conditions": {
+    "Applications": {
+      "ApplicationFilter": {
+        "Mode": null,
+        "Rule": null
+      },
+      "ExcludeApplications": [],
+      "IncludeApplications": [
+        "509e4652-da8d-478d-a730-e9d4a1996ca4",
+        "56c1da01-2129-48f7-9355-af6d59d42766",
+        "de8bc8b5-d9f9-48b1-a8ad-b748da725064",
+        "0bf30f3b-4a52-48df-9a82-234910c4a086",
+        "14d82eec-204b-4c2f-b7e8-296a70dab67e",
+        "f8f7a2aa-e116-4ba6-8aea-ca162cfa310d",
+        "MicrosoftAdminPortals"
+      ],
+      "IncludeAuthenticationContextClassReferences": [],
+      "IncludeUserActions": []
+    },
+    "AuthenticationFlows": {
+      "TransferMethods": null
+    },
+    "ClientAppTypes": [
+      "all"
+    ],
+    "ClientApplications": {
+      "ExcludeServicePrincipals": null,
+      "IncludeServicePrincipals": null,
+      "ServicePrincipalFilter": {
+        "Mode": null,
+        "Rule": null
+      }
+    },
+    "Devices": {
+      "DeviceFilter": {
+        "Mode": null,
+        "Rule": null
+      }
+    },
+    "InsiderRiskLevels": null,
+    "Locations": {
+      "ExcludeLocations": [
+        "AllTrusted"
+      ],
+      "IncludeLocations": [
+        "All"
+      ]
+    },
+    "Platforms": {
+      "ExcludePlatforms": [],
+      "IncludePlatforms": [
+        "all"
+      ]
+    },
+    "ServicePrincipalRiskLevels": [],
+    "SignInRiskLevels": [],
+    "UserRiskLevels": [],
+    "Users": {
+      "ExcludeGroups": [],
+      "ExcludeGuestsOrExternalUsers": {
+        "ExternalTenants": {
+          "MembershipKind": "enumerated"
+        },
+        "GuestOrExternalUserTypes": "serviceProvider"
+      },
+      "ExcludeRoles": [],
+      "ExcludeUsers": [
+        "6ed29d9d-8152-40f7-be7f-3c9cda1674d2",
+        "2b4d983c-55b9-4974-b73b-6cdab9ceae09",
+        "19373682-629c-4ccb-9472-bde20870905f",
+        "01755114-821e-450a-93d3-e4dbc8fc6650"
+      ],
+      "IncludeGroups": [],
+      "IncludeGuestsOrExternalUsers": {
+        "ExternalTenants": {
+          "MembershipKind": null
+        },
+        "GuestOrExternalUserTypes": null
+      },
+      "IncludeRoles": [],
+      "IncludeUsers": [
+        "All"
+      ]
+    }
+  },
+  "CreatedDateTime": "2025-05-29T13:09:43.3370444Z",
+  "Description": null,
+  "DisplayName": "CAP12 - Microsoft Admin Portals and Graph: Block devices coming from untrusted locations",
+  "GrantControls": {
+    "AuthenticationStrength": {
+      "AllowedCombinations": null,
+      "CombinationConfigurations": null,
+      "CreatedDateTime": null,
+      "Description": null,
+      "DisplayName": null,
+      "Id": null,
+      "ModifiedDateTime": null,
+      "PolicyType": null,
+      "RequirementsSatisfied": null
+    },
+    "BuiltInControls": [
+      "block"
+    ],
+    "CustomAuthenticationFactors": [],
+    "Operator": "OR",
+    "TermsOfUse": []
+  },
+  "Id": "df560e7c-e7c7-4101-9dfb-803d11a61581",
+  "ModifiedDateTime": "2025-07-22T13:24:39.197407Z",
+  "SessionControls": {
+    "ApplicationEnforcedRestrictions": {
+      "IsEnabled": null
+    },
+    "CloudAppSecurity": {
+      "CloudAppSecurityType": null,
+      "IsEnabled": null
+    },
+    "DisableResilienceDefaults": null,
+    "PersistentBrowser": {
+      "IsEnabled": null,
+      "Mode": null
+    },
+    "SecureSignInSession": {
+      "IsEnabled": null
+    },
+    "SignInFrequency": {
+      "AuthenticationType": null,
+      "FrequencyInterval": null,
+      "IsEnabled": null,
+      "Type": null,
+      "Value": null
+    }
+  },
+  "State": "enabled",
+  "TemplateId": null,
+  "AdditionalProperties": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies/$entity"
+  }
+}
