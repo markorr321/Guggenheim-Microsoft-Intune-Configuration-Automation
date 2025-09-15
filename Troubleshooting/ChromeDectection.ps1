@@ -29,55 +29,35 @@ function Add-FindResult($versionString, $source) {
 
 # --- 1) MSI install check (enterprise installs) ---
 if ($MsiProductCode) {
-    $uninstallRoots = @(
-        "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$MsiProductCode",
-        "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$MsiProductCode"
-    )
-    foreach ($root in $uninstallRoots) {
-        if (Test-Path $root) {
-            try {
-                $p = Get-ItemProperty $root
-                if ($p.DisplayVersion) {
-                    Add-FindResult -versionString $p.DisplayVersion -source "MSI:$root"
-                }
-            } catch {}
-        }
-    }
-}
-
-# --- 2) Per-machine EXE via Google Update (HKLM) ---
-# Stable channel AppID:
-$ChromeStableAppId = "{8A69D345-D564-463C-AFF1-A69D9E530F96}"
-$clientsKey = "HKLM:\SOFTWARE\Google\Update\Clients\$ChromeStableAppId"
-if (Test-Path $clientsKey) {
     try {
-        $pv = (Get-ItemProperty $clientsKey).pv  # product version
-        if ($pv) { Add-FindResult $pv "HKLM Update\Clients pv" }
+        $msi = Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$MsiProductCode" -ErrorAction Stop
+        if ($msi.DisplayVersion) { Add-FindResult $msi.DisplayVersion "MSI" }
+    } catch {}
+    try {
+        $msiWow = Get-ItemProperty "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$MsiProductCode" -ErrorAction Stop
+        if ($msiWow.DisplayVersion) { Add-FindResult $msiWow.DisplayVersion "MSI-WOW6432Node" }
     } catch {}
 }
 
-# --- 3) Per-user EXE via BLBeacon (HKU for all loaded user hives) ---
-# Intune detection runs as SYSTEM, so enumerate HKEY_USERS SIDs to simulate HKCU for each user
-$sidExclude = @(
-    "S-1-5-18", "S-1-5-19", "S-1-5-20"  # LocalSystem, LocalService, NetworkService
+# --- 2) Registry-based version checks (all install types) ---
+$regPaths = @(
+    "HKLM:\SOFTWARE\Google\Update\Clients",
+    "HKLM:\SOFTWARE\WOW6432Node\Google\Update\Clients",
+    "HKCU:\SOFTWARE\Google\Update\Clients"
 )
 
-try {
-    $hku = Get-ChildItem "Registry::HKEY_USERS" -ErrorAction SilentlyContinue
-    foreach ($sid in $hku) {
-        if ($sid.Name -match "S-1-5-21-" -and -not ($sidExclude -contains ($sid.PSChildName))) {
-            $bl = "Registry::HKEY_USERS\$($sid.PSChildName)\Software\Google\Chrome\BLBeacon"
-            if (Test-Path $bl) {
-                try {
-                    $ver = (Get-ItemProperty $bl).version
-                    if ($ver) { Add-FindResult $ver "HKU:\$($sid.PSChildName)\Chrome\BLBeacon" }
-                } catch {}
-            }
+foreach ($rp in $regPaths) {
+    try {
+        Get-ChildItem $rp -ErrorAction SilentlyContinue | ForEach-Object {
+            try {
+                $dv = (Get-ItemProperty $_.PsPath -ErrorAction Stop).pv
+                if ($dv) { Add-FindResult $dv "Reg:$rp\$($_.PSChildName)" }
+            } catch {}
         }
-    }
-} catch {}
+    } catch {}
+}
 
-# --- 4) File version checks (per-machine and common per-user locations) ---
+# --- 3) File system checks for chrome.exe (machine & user) ---
 $exePaths = @(
     "$env:ProgramFiles\Google\Chrome\Application\chrome.exe",
     "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe"
@@ -110,8 +90,8 @@ if ($foundVersions.Count -gt 0) {
         Write-Output ("Chrome detected {0} (>= {1}) via {2}" -f $best.Version, $req, $best.Source)
         exit 0
     } else {
-        Write-Output ("Chrome detected {0} (< {1}); sources: {2}" -f $best.Version, $req,
-            ($foundVersions | ForEach-Object { "$($_.Version) from $($_.Source)" } -join "; "))
+        $sources = ($foundVersions | ForEach-Object { "$($_.Version) from $($_.Source)" }) -join "; "
+        Write-Output ("Chrome detected {0} (< {1}); sources: {2}" -f $best.Version, $req, $sources)
         exit 1
     }
 } else {
