@@ -1,0 +1,11 @@
+Rule Type: Registry
+
+Key Path: HKLM\SOFTWARE\Microsoft\PowerShellCore\InstalledVersions\31ab5147-9a97-4452-8443-d9709f0516e1
+
+Value name: SemanticVersion
+
+Detection method: String comparision
+
+Value: 7.5.2
+
+Associated with a 32-bit app on 64-bit clients: No
