@@ -1,1 +1,6 @@
 .\ServiceUI.exe -Process:explorer.exe Deploy-Application.exe
+
+.\ServiceUI.exe -process:explorer.exe `
+  "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" `
+  -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden `
+  -File ".\Deploy-Application.ps1" -DeploymentType Install -DeployMode Interactive
